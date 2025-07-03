@@ -3,8 +3,8 @@
 | Initialisierung und Planung | 1               |                              |       |           |
 | Kontextdiagramme            | 2               |                              |       |           |
 | BPMN                        | 1               |                              |       |           |
-| ERM                         | 1               |                              |       |           |
 | Korrelationsmatrix          | 1               |                              |       |           |
+| ERM                         | 1               |                              |       |           |
 | Klassendiagramm             | 1               |                              |       |           |
 | Komponentendiagramm         | 1               |                              |       |           |
 | Testplan                    | 4               |                              |       |           |
