@@ -1,0 +1,23 @@
+USE [ERPFORALL]
+GO
+
+/****** Object:  Table [dbo].[Lagerort]    Script Date: 28/08/2025 09:54:28 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Lagerort](
+	[PKey_Lagerort] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NULL,
+	[Addresse] [varchar](50) NOT NULL,
+	[Ort] [varchar](50) NOT NULL,
+	[PLZ] [int] NOT NULL,
+ CONSTRAINT [PK_Lagerort] PRIMARY KEY CLUSTERED 
+(
+	[PKey_Lagerort] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
