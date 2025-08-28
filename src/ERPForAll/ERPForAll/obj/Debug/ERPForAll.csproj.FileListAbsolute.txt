@@ -1,0 +1,10 @@
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\bin\Debug\ERPForAll.exe.config
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\bin\Debug\ERPForAll.exe
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\bin\Debug\ERPForAll.pdb
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\obj\Debug\ERPForAll.csproj.AssemblyReference.cache
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\obj\Debug\ERPForAll.ERPForAll.resources
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\obj\Debug\ERPForAll.Properties.Resources.resources
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\obj\Debug\ERPForAll.csproj.GenerateResource.cache
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\obj\Debug\ERPForAll.csproj.CoreCompileInputs.cache
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\obj\Debug\ERPForAll.exe
+C:\Users\domin\Repos\erp\src\ERPForAll\ERPForAll\obj\Debug\ERPForAll.pdb
