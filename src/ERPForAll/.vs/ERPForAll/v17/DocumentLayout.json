@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\domin\\source\\repos\\ERPForAll\\",
+  "WorkspaceRootPath": "C:\\Users\\domin\\Repos\\erp\\src\\ERPForAll\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DF1BA52C-7F68-4682-B800-9B147678A7DA}|ERPForAll\\ERPForAll.csproj|c:\\users\\domin\\source\\repos\\erpforall\\erpforall\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{DF1BA52C-7F68-4682-B800-9B147678A7DA}|ERPForAll\\ERPForAll.csproj|c:\\users\\domin\\repos\\erp\\src\\erpforall\\erpforall\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DF1BA52C-7F68-4682-B800-9B147678A7DA}|ERPForAll\\ERPForAll.csproj|solutionrelative:erpforall\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -20,9 +20,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\domin\\source\\repos\\ERPForAll\\ERPForAll\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\domin\\Repos\\erp\\src\\ERPForAll\\ERPForAll\\Form1.cs",
               "RelativeDocumentMoniker": "ERPForAll\\Form1.cs",
-              "ToolTip": "C:\\Users\\domin\\source\\repos\\ERPForAll\\ERPForAll\\Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\domin\\Repos\\erp\\src\\ERPForAll\\ERPForAll\\Form1.cs [Design]",
               "RelativeToolTip": "ERPForAll\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-21T08:32:42.101Z",
