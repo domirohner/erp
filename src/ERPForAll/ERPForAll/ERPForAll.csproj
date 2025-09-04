@@ -46,12 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\ArtikelLagerortRepository.cs" />
+    <Compile Include="Data\ArtikelRepository.cs" />
+    <Compile Include="Data\BestellungRepository.cs" />
+    <Compile Include="Data\DatabaseHelper.cs" />
+    <Compile Include="Data\KundeRepository.cs" />
+    <Compile Include="Data\LagerortRepository.cs" />
+    <Compile Include="Data\LieferantRepository.cs" />
+    <Compile Include="Data\MahnungRepository.cs" />
+    <Compile Include="Data\ReportRepository.cs" />
+    <Compile Include="Data\UmsatzRepository.cs" />
+    <Compile Include="Data\VerkaufService.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Artikel.cs" />
+    <Compile Include="Models\ArtikelBestandDto.cs" />
+    <Compile Include="Models\Bestellung.cs" />
+    <Compile Include="Models\BestellungArtikel.cs" />
+    <Compile Include="Models\BestellungStatusDto.cs" />
+    <Compile Include="Models\EinkaufListeDto.cs" />
+    <Compile Include="Models\Kunde.cs" />
+    <Compile Include="Models\Lagerort.cs" />
+    <Compile Include="Models\Lieferant.cs" />
+    <Compile Include="Models\MahnlisteEintragDto.cs" />
+    <Compile Include="Models\Umsatz.cs" />
+    <Compile Include="Models\UmsatzProKundeDto.cs" />
+    <Compile Include="Models\VerkaufListeDto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -79,5 +103,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

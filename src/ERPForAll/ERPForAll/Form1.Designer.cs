@@ -31,7 +31,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Finanzmodul = new System.Windows.Forms.TabPage();
             this.fm_mahnliste_gv = new System.Windows.Forms.DataGridView();
-            this.fm_umsatz_gv = new System.Windows.Forms.DataGridView();
             this.fm_kreditoren_gv = new System.Windows.Forms.DataGridView();
             this.fm_debitoren_gv = new System.Windows.Forms.DataGridView();
             this.fm_debitoren_email = new System.Windows.Forms.TextBox();
@@ -40,9 +39,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
             this.fm_status_set = new System.Windows.Forms.Button();
-            this.fm_status_status = new System.Windows.Forms.ComboBox();
             this.fm_status_unbezahlt = new System.Windows.Forms.ComboBox();
-            this.label47 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.fm_verkauf_status = new System.Windows.Forms.ComboBox();
             this.label46 = new System.Windows.Forms.Label();
@@ -95,6 +92,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Lagermodul = new System.Windows.Forms.TabPage();
+            this.lm_artikel_gv = new System.Windows.Forms.DataGridView();
             this.label50 = new System.Windows.Forms.Label();
             this.lm_lagermenge_lagerort = new System.Windows.Forms.ComboBox();
             this.lm_lagerort_cb = new System.Windows.Forms.ComboBox();
@@ -118,38 +116,28 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.Einkaufsmodul = new System.Windows.Forms.TabPage();
-            this.em_bestellungen_add = new System.Windows.Forms.Button();
-            this.label57 = new System.Windows.Forms.Label();
-            this.em_bestellungen_status = new System.Windows.Forms.ComboBox();
-            this.label56 = new System.Windows.Forms.Label();
-            this.em_bestellungen_preis_ps = new System.Windows.Forms.TextBox();
-            this.em_bestellungen_menge = new System.Windows.Forms.TextBox();
-            this.label55 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.em_bestellungen_artikel = new System.Windows.Forms.ComboBox();
-            this.label53 = new System.Windows.Forms.Label();
-            this.em_bestellungen_debitor = new System.Windows.Forms.ComboBox();
-            this.label52 = new System.Windows.Forms.Label();
-            this.em_bestellungen_kreditor = new System.Windows.Forms.ComboBox();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.em_kreditoren_show = new System.Windows.Forms.Button();
-            this.em_bestellungen_show = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lm_artikel_gv = new System.Windows.Forms.DataGridView();
-            this.em_einkaufe_gv = new System.Windows.Forms.DataGridView();
             this.em_verkaufe_gv = new System.Windows.Forms.DataGridView();
+            this.em_einkaufe_gv = new System.Windows.Forms.DataGridView();
+            this.label15 = new System.Windows.Forms.Label();
+            this.em_verkaufe_show = new System.Windows.Forms.Button();
+            this.em_einkaeufe_show = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.fm_verkauf_verkaeufer = new System.Windows.Forms.ComboBox();
+            this.fm_umsatz_verkaeufer = new System.Windows.Forms.ComboBox();
+            this.fm_umsatz = new System.Windows.Forms.TextBox();
+            this.em_einkaufe_debitor = new System.Windows.Forms.ComboBox();
+            this.em_einkaufe_kreditor = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.Finanzmodul.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fm_mahnliste_gv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fm_umsatz_gv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fm_kreditoren_gv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fm_debitoren_gv)).BeginInit();
             this.Lagermodul.SuspendLayout();
-            this.Einkaufsmodul.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lm_artikel_gv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.em_einkaufe_gv)).BeginInit();
+            this.Einkaufsmodul.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.em_verkaufe_gv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.em_einkaufe_gv)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -165,8 +153,11 @@
             // 
             // Finanzmodul
             // 
+            this.Finanzmodul.Controls.Add(this.fm_umsatz);
+            this.Finanzmodul.Controls.Add(this.fm_umsatz_verkaeufer);
+            this.Finanzmodul.Controls.Add(this.fm_verkauf_verkaeufer);
+            this.Finanzmodul.Controls.Add(this.label18);
             this.Finanzmodul.Controls.Add(this.fm_mahnliste_gv);
-            this.Finanzmodul.Controls.Add(this.fm_umsatz_gv);
             this.Finanzmodul.Controls.Add(this.fm_kreditoren_gv);
             this.Finanzmodul.Controls.Add(this.fm_debitoren_gv);
             this.Finanzmodul.Controls.Add(this.fm_debitoren_email);
@@ -175,9 +166,7 @@
             this.Finanzmodul.Controls.Add(this.label16);
             this.Finanzmodul.Controls.Add(this.label49);
             this.Finanzmodul.Controls.Add(this.fm_status_set);
-            this.Finanzmodul.Controls.Add(this.fm_status_status);
             this.Finanzmodul.Controls.Add(this.fm_status_unbezahlt);
-            this.Finanzmodul.Controls.Add(this.label47);
             this.Finanzmodul.Controls.Add(this.label48);
             this.Finanzmodul.Controls.Add(this.fm_verkauf_status);
             this.Finanzmodul.Controls.Add(this.label46);
@@ -245,14 +234,6 @@
             this.fm_mahnliste_gv.Size = new System.Drawing.Size(464, 180);
             this.fm_mahnliste_gv.TabIndex = 78;
             // 
-            // fm_umsatz_gv
-            // 
-            this.fm_umsatz_gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.fm_umsatz_gv.Location = new System.Drawing.Point(34, 513);
-            this.fm_umsatz_gv.Name = "fm_umsatz_gv";
-            this.fm_umsatz_gv.Size = new System.Drawing.Size(464, 180);
-            this.fm_umsatz_gv.TabIndex = 77;
-            // 
             // fm_kreditoren_gv
             // 
             this.fm_kreditoren_gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -312,20 +293,13 @@
             // 
             // fm_status_set
             // 
-            this.fm_status_set.Location = new System.Drawing.Point(958, 861);
+            this.fm_status_set.Location = new System.Drawing.Point(914, 830);
             this.fm_status_set.Name = "fm_status_set";
-            this.fm_status_set.Size = new System.Drawing.Size(75, 23);
+            this.fm_status_set.Size = new System.Drawing.Size(118, 23);
             this.fm_status_set.TabIndex = 69;
-            this.fm_status_set.Text = "Setzen";
+            this.fm_status_set.Text = "\"Bezahlt\" setzen";
             this.fm_status_set.UseVisualStyleBackColor = true;
-            // 
-            // fm_status_status
-            // 
-            this.fm_status_status.FormattingEnabled = true;
-            this.fm_status_status.Location = new System.Drawing.Point(863, 827);
-            this.fm_status_status.Name = "fm_status_status";
-            this.fm_status_status.Size = new System.Drawing.Size(170, 21);
-            this.fm_status_status.TabIndex = 68;
+            this.fm_status_set.Click += new System.EventHandler(this.fm_status_set_Click);
             // 
             // fm_status_unbezahlt
             // 
@@ -334,15 +308,7 @@
             this.fm_status_unbezahlt.Name = "fm_status_unbezahlt";
             this.fm_status_unbezahlt.Size = new System.Drawing.Size(170, 21);
             this.fm_status_unbezahlt.TabIndex = 67;
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(783, 832);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(37, 13);
-            this.label47.TabIndex = 66;
-            this.label47.Text = "Status";
+            this.fm_status_unbezahlt.DropDown += new System.EventHandler(this.fm_status_unbezahlt_DropDown);
             // 
             // label48
             // 
@@ -356,7 +322,7 @@
             // fm_verkauf_status
             // 
             this.fm_verkauf_status.FormattingEnabled = true;
-            this.fm_verkauf_status.Location = new System.Drawing.Point(489, 917);
+            this.fm_verkauf_status.Location = new System.Drawing.Point(489, 942);
             this.fm_verkauf_status.Name = "fm_verkauf_status";
             this.fm_verkauf_status.Size = new System.Drawing.Size(106, 21);
             this.fm_verkauf_status.TabIndex = 64;
@@ -364,7 +330,7 @@
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(410, 920);
+            this.label46.Location = new System.Drawing.Point(410, 945);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(37, 13);
             this.label46.TabIndex = 63;
@@ -372,7 +338,7 @@
             // 
             // fm_verkauf_preis_ps
             // 
-            this.fm_verkauf_preis_ps.Location = new System.Drawing.Point(489, 889);
+            this.fm_verkauf_preis_ps.Location = new System.Drawing.Point(489, 914);
             this.fm_verkauf_preis_ps.Name = "fm_verkauf_preis_ps";
             this.fm_verkauf_preis_ps.Size = new System.Drawing.Size(106, 20);
             this.fm_verkauf_preis_ps.TabIndex = 62;
@@ -380,7 +346,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(410, 892);
+            this.label45.Location = new System.Drawing.Point(410, 917);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(79, 13);
             this.label45.TabIndex = 61;
@@ -389,7 +355,7 @@
             // fm_verkauf_kunde
             // 
             this.fm_verkauf_kunde.FormattingEnabled = true;
-            this.fm_verkauf_kunde.Location = new System.Drawing.Point(489, 825);
+            this.fm_verkauf_kunde.Location = new System.Drawing.Point(489, 850);
             this.fm_verkauf_kunde.Name = "fm_verkauf_kunde";
             this.fm_verkauf_kunde.Size = new System.Drawing.Size(213, 21);
             this.fm_verkauf_kunde.TabIndex = 60;
@@ -398,7 +364,7 @@
             // fm_verkauf_artikel
             // 
             this.fm_verkauf_artikel.FormattingEnabled = true;
-            this.fm_verkauf_artikel.Location = new System.Drawing.Point(489, 794);
+            this.fm_verkauf_artikel.Location = new System.Drawing.Point(489, 791);
             this.fm_verkauf_artikel.Name = "fm_verkauf_artikel";
             this.fm_verkauf_artikel.Size = new System.Drawing.Size(213, 21);
             this.fm_verkauf_artikel.TabIndex = 59;
@@ -406,7 +372,7 @@
             // 
             // fm_verkauf_add
             // 
-            this.fm_verkauf_add.Location = new System.Drawing.Point(627, 943);
+            this.fm_verkauf_add.Location = new System.Drawing.Point(627, 968);
             this.fm_verkauf_add.Name = "fm_verkauf_add";
             this.fm_verkauf_add.Size = new System.Drawing.Size(75, 23);
             this.fm_verkauf_add.TabIndex = 58;
@@ -416,7 +382,7 @@
             // 
             // fm_verkauf_menge
             // 
-            this.fm_verkauf_menge.Location = new System.Drawing.Point(489, 859);
+            this.fm_verkauf_menge.Location = new System.Drawing.Point(489, 884);
             this.fm_verkauf_menge.Name = "fm_verkauf_menge";
             this.fm_verkauf_menge.Size = new System.Drawing.Size(106, 20);
             this.fm_verkauf_menge.TabIndex = 57;
@@ -424,7 +390,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(410, 861);
+            this.label22.Location = new System.Drawing.Point(410, 886);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(40, 13);
             this.label22.TabIndex = 54;
@@ -433,7 +399,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(409, 830);
+            this.label23.Location = new System.Drawing.Point(409, 855);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(38, 13);
             this.label23.TabIndex = 53;
@@ -459,7 +425,7 @@
             // 
             // fm_umsatz_show
             // 
-            this.fm_umsatz_show.Location = new System.Drawing.Point(423, 699);
+            this.fm_umsatz_show.Location = new System.Drawing.Point(172, 570);
             this.fm_umsatz_show.Name = "fm_umsatz_show";
             this.fm_umsatz_show.Size = new System.Drawing.Size(75, 23);
             this.fm_umsatz_show.TabIndex = 50;
@@ -775,7 +741,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 26);
+            this.label1.Location = new System.Drawing.Point(19, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 1;
@@ -814,6 +780,14 @@
             this.Lagermodul.Text = "Lagermodul";
             this.Lagermodul.UseVisualStyleBackColor = true;
             // 
+            // lm_artikel_gv
+            // 
+            this.lm_artikel_gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.lm_artikel_gv.Location = new System.Drawing.Point(34, 73);
+            this.lm_artikel_gv.Name = "lm_artikel_gv";
+            this.lm_artikel_gv.Size = new System.Drawing.Size(495, 190);
+            this.lm_artikel_gv.TabIndex = 77;
+            // 
             // label50
             // 
             this.label50.AutoSize = true;
@@ -830,6 +804,7 @@
             this.lm_lagermenge_lagerort.Name = "lm_lagermenge_lagerort";
             this.lm_lagermenge_lagerort.Size = new System.Drawing.Size(173, 21);
             this.lm_lagermenge_lagerort.TabIndex = 22;
+            this.lm_lagermenge_lagerort.DropDown += new System.EventHandler(this.lm_lagermenge_lagerort_DropDown);
             // 
             // lm_lagerort_cb
             // 
@@ -838,6 +813,7 @@
             this.lm_lagerort_cb.Name = "lm_lagerort_cb";
             this.lm_lagerort_cb.Size = new System.Drawing.Size(144, 21);
             this.lm_lagerort_cb.TabIndex = 21;
+            this.lm_lagerort_cb.DropDown += new System.EventHandler(this.lm_lagerort_cb_DropDown);
             // 
             // label21
             // 
@@ -856,6 +832,7 @@
             this.lm_lagermenge_set.TabIndex = 19;
             this.lm_lagermenge_set.Text = "Setzen";
             this.lm_lagermenge_set.UseVisualStyleBackColor = true;
+            this.lm_lagermenge_set.Click += new System.EventHandler(this.lm_lagermenge_set_Click);
             // 
             // lm_lagerort_add
             // 
@@ -865,6 +842,7 @@
             this.lm_lagerort_add.TabIndex = 18;
             this.lm_lagerort_add.Text = "Hinzufügen";
             this.lm_lagerort_add.UseVisualStyleBackColor = true;
+            this.lm_lagerort_add.Click += new System.EventHandler(this.lm_lagerort_add_Click);
             // 
             // lm_lagerort_plz
             // 
@@ -908,7 +886,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(48, 382);
+            this.label11.Location = new System.Drawing.Point(45, 382);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(45, 13);
             this.label11.TabIndex = 12;
@@ -962,6 +940,7 @@
             this.lm_lagermenge_artikel.Name = "lm_lagermenge_artikel";
             this.lm_lagermenge_artikel.Size = new System.Drawing.Size(173, 21);
             this.lm_lagermenge_artikel.TabIndex = 6;
+            this.lm_lagermenge_artikel.DropDown += new System.EventHandler(this.lm_lagermenge_artikel_DropDown);
             // 
             // lm_artikel_show
             // 
@@ -971,6 +950,7 @@
             this.lm_artikel_show.TabIndex = 5;
             this.lm_artikel_show.Text = "Anzeigen";
             this.lm_artikel_show.UseVisualStyleBackColor = true;
+            this.lm_artikel_show.Click += new System.EventHandler(this.lm_artikel_show_Click);
             // 
             // label7
             // 
@@ -1001,25 +981,13 @@
             // 
             // Einkaufsmodul
             // 
+            this.Einkaufsmodul.Controls.Add(this.em_einkaufe_kreditor);
+            this.Einkaufsmodul.Controls.Add(this.em_einkaufe_debitor);
             this.Einkaufsmodul.Controls.Add(this.em_verkaufe_gv);
             this.Einkaufsmodul.Controls.Add(this.em_einkaufe_gv);
-            this.Einkaufsmodul.Controls.Add(this.em_bestellungen_add);
-            this.Einkaufsmodul.Controls.Add(this.label57);
-            this.Einkaufsmodul.Controls.Add(this.em_bestellungen_status);
-            this.Einkaufsmodul.Controls.Add(this.label56);
-            this.Einkaufsmodul.Controls.Add(this.em_bestellungen_preis_ps);
-            this.Einkaufsmodul.Controls.Add(this.em_bestellungen_menge);
-            this.Einkaufsmodul.Controls.Add(this.label55);
-            this.Einkaufsmodul.Controls.Add(this.label54);
-            this.Einkaufsmodul.Controls.Add(this.em_bestellungen_artikel);
-            this.Einkaufsmodul.Controls.Add(this.label53);
-            this.Einkaufsmodul.Controls.Add(this.em_bestellungen_debitor);
-            this.Einkaufsmodul.Controls.Add(this.label52);
-            this.Einkaufsmodul.Controls.Add(this.em_bestellungen_kreditor);
-            this.Einkaufsmodul.Controls.Add(this.label51);
             this.Einkaufsmodul.Controls.Add(this.label15);
-            this.Einkaufsmodul.Controls.Add(this.em_kreditoren_show);
-            this.Einkaufsmodul.Controls.Add(this.em_bestellungen_show);
+            this.Einkaufsmodul.Controls.Add(this.em_verkaufe_show);
+            this.Einkaufsmodul.Controls.Add(this.em_einkaeufe_show);
             this.Einkaufsmodul.Controls.Add(this.label14);
             this.Einkaufsmodul.Location = new System.Drawing.Point(4, 22);
             this.Einkaufsmodul.Name = "Einkaufsmodul";
@@ -1028,150 +996,50 @@
             this.Einkaufsmodul.Text = "Einkaufsmodul";
             this.Einkaufsmodul.UseVisualStyleBackColor = true;
             // 
-            // em_bestellungen_add
+            // em_verkaufe_gv
             // 
-            this.em_bestellungen_add.Location = new System.Drawing.Point(228, 816);
-            this.em_bestellungen_add.Name = "em_bestellungen_add";
-            this.em_bestellungen_add.Size = new System.Drawing.Size(75, 23);
-            this.em_bestellungen_add.TabIndex = 51;
-            this.em_bestellungen_add.Text = "Hinzufügen";
-            this.em_bestellungen_add.UseVisualStyleBackColor = true;
+            this.em_verkaufe_gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.em_verkaufe_gv.Location = new System.Drawing.Point(40, 329);
+            this.em_verkaufe_gv.Name = "em_verkaufe_gv";
+            this.em_verkaufe_gv.Size = new System.Drawing.Size(495, 190);
+            this.em_verkaufe_gv.TabIndex = 79;
             // 
-            // label57
+            // em_einkaufe_gv
             // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(42, 783);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(37, 13);
-            this.label57.TabIndex = 50;
-            this.label57.Text = "Status";
-            // 
-            // em_bestellungen_status
-            // 
-            this.em_bestellungen_status.FormattingEnabled = true;
-            this.em_bestellungen_status.Location = new System.Drawing.Point(128, 780);
-            this.em_bestellungen_status.Name = "em_bestellungen_status";
-            this.em_bestellungen_status.Size = new System.Drawing.Size(175, 21);
-            this.em_bestellungen_status.TabIndex = 49;
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(40, 746);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(79, 13);
-            this.label56.TabIndex = 48;
-            this.label56.Text = "Preis pro Stück";
-            // 
-            // em_bestellungen_preis_ps
-            // 
-            this.em_bestellungen_preis_ps.Location = new System.Drawing.Point(128, 743);
-            this.em_bestellungen_preis_ps.Name = "em_bestellungen_preis_ps";
-            this.em_bestellungen_preis_ps.Size = new System.Drawing.Size(70, 20);
-            this.em_bestellungen_preis_ps.TabIndex = 47;
-            // 
-            // em_bestellungen_menge
-            // 
-            this.em_bestellungen_menge.Location = new System.Drawing.Point(128, 711);
-            this.em_bestellungen_menge.Name = "em_bestellungen_menge";
-            this.em_bestellungen_menge.Size = new System.Drawing.Size(70, 20);
-            this.em_bestellungen_menge.TabIndex = 46;
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(41, 711);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(40, 13);
-            this.label55.TabIndex = 45;
-            this.label55.Text = "Menge";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(42, 674);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(36, 13);
-            this.label54.TabIndex = 44;
-            this.label54.Text = "Artikel";
-            // 
-            // em_bestellungen_artikel
-            // 
-            this.em_bestellungen_artikel.FormattingEnabled = true;
-            this.em_bestellungen_artikel.Location = new System.Drawing.Point(128, 672);
-            this.em_bestellungen_artikel.Name = "em_bestellungen_artikel";
-            this.em_bestellungen_artikel.Size = new System.Drawing.Size(175, 21);
-            this.em_bestellungen_artikel.TabIndex = 43;
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(42, 634);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(41, 13);
-            this.label53.TabIndex = 42;
-            this.label53.Text = "Debitor";
-            // 
-            // em_bestellungen_debitor
-            // 
-            this.em_bestellungen_debitor.FormattingEnabled = true;
-            this.em_bestellungen_debitor.Location = new System.Drawing.Point(128, 632);
-            this.em_bestellungen_debitor.Name = "em_bestellungen_debitor";
-            this.em_bestellungen_debitor.Size = new System.Drawing.Size(175, 21);
-            this.em_bestellungen_debitor.TabIndex = 41;
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(42, 597);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(43, 13);
-            this.label52.TabIndex = 40;
-            this.label52.Text = "Kreditor";
-            // 
-            // em_bestellungen_kreditor
-            // 
-            this.em_bestellungen_kreditor.FormattingEnabled = true;
-            this.em_bestellungen_kreditor.Location = new System.Drawing.Point(128, 594);
-            this.em_bestellungen_kreditor.Name = "em_bestellungen_kreditor";
-            this.em_bestellungen_kreditor.Size = new System.Drawing.Size(175, 21);
-            this.em_bestellungen_kreditor.TabIndex = 39;
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(37, 558);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(68, 13);
-            this.label51.TabIndex = 34;
-            this.label51.Text = "Bestellungen";
+            this.em_einkaufe_gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.em_einkaufe_gv.Location = new System.Drawing.Point(40, 77);
+            this.em_einkaufe_gv.Name = "em_einkaufe_gv";
+            this.em_einkaufe_gv.Size = new System.Drawing.Size(495, 190);
+            this.em_einkaufe_gv.TabIndex = 78;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(40, 281);
+            this.label15.Location = new System.Drawing.Point(40, 283);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(50, 13);
             this.label15.TabIndex = 11;
             this.label15.Text = "Verkäufe";
             // 
-            // em_kreditoren_show
+            // em_verkaufe_show
             // 
-            this.em_kreditoren_show.Location = new System.Drawing.Point(460, 495);
-            this.em_kreditoren_show.Name = "em_kreditoren_show";
-            this.em_kreditoren_show.Size = new System.Drawing.Size(75, 23);
-            this.em_kreditoren_show.TabIndex = 10;
-            this.em_kreditoren_show.Text = "Anzeigen";
-            this.em_kreditoren_show.UseVisualStyleBackColor = true;
+            this.em_verkaufe_show.Location = new System.Drawing.Point(460, 525);
+            this.em_verkaufe_show.Name = "em_verkaufe_show";
+            this.em_verkaufe_show.Size = new System.Drawing.Size(75, 23);
+            this.em_verkaufe_show.TabIndex = 10;
+            this.em_verkaufe_show.Text = "Anzeigen";
+            this.em_verkaufe_show.UseVisualStyleBackColor = true;
+            this.em_verkaufe_show.Click += new System.EventHandler(this.em_verkaufe_show_Click);
             // 
-            // em_bestellungen_show
+            // em_einkaeufe_show
             // 
-            this.em_bestellungen_show.Location = new System.Drawing.Point(460, 248);
-            this.em_bestellungen_show.Name = "em_bestellungen_show";
-            this.em_bestellungen_show.Size = new System.Drawing.Size(75, 23);
-            this.em_bestellungen_show.TabIndex = 4;
-            this.em_bestellungen_show.Text = "Anzeigen";
-            this.em_bestellungen_show.UseVisualStyleBackColor = true;
+            this.em_einkaeufe_show.Location = new System.Drawing.Point(460, 275);
+            this.em_einkaeufe_show.Name = "em_einkaeufe_show";
+            this.em_einkaeufe_show.Size = new System.Drawing.Size(75, 23);
+            this.em_einkaeufe_show.TabIndex = 4;
+            this.em_einkaeufe_show.Text = "Anzeigen";
+            this.em_einkaeufe_show.UseVisualStyleBackColor = true;
+            this.em_einkaeufe_show.Click += new System.EventHandler(this.em_einkaeufe_show_Click);
             // 
             // label14
             // 
@@ -1182,29 +1050,57 @@
             this.label14.TabIndex = 3;
             this.label14.Text = "Einkäufe";
             // 
-            // lm_artikel_gv
+            // label18
             // 
-            this.lm_artikel_gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.lm_artikel_gv.Location = new System.Drawing.Point(34, 73);
-            this.lm_artikel_gv.Name = "lm_artikel_gv";
-            this.lm_artikel_gv.Size = new System.Drawing.Size(495, 190);
-            this.lm_artikel_gv.TabIndex = 77;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(409, 826);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(53, 13);
+            this.label18.TabIndex = 79;
+            this.label18.Text = "Verkäufer";
             // 
-            // em_einkaufe_gv
+            // fm_verkauf_verkaeufer
             // 
-            this.em_einkaufe_gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.em_einkaufe_gv.Location = new System.Drawing.Point(40, 50);
-            this.em_einkaufe_gv.Name = "em_einkaufe_gv";
-            this.em_einkaufe_gv.Size = new System.Drawing.Size(495, 190);
-            this.em_einkaufe_gv.TabIndex = 78;
+            this.fm_verkauf_verkaeufer.FormattingEnabled = true;
+            this.fm_verkauf_verkaeufer.Location = new System.Drawing.Point(489, 821);
+            this.fm_verkauf_verkaeufer.Name = "fm_verkauf_verkaeufer";
+            this.fm_verkauf_verkaeufer.Size = new System.Drawing.Size(213, 21);
+            this.fm_verkauf_verkaeufer.TabIndex = 80;
+            this.fm_verkauf_verkaeufer.DropDown += new System.EventHandler(this.fm_verkauf_verkaeufer_DropDown);
             // 
-            // em_verkaufe_gv
+            // fm_umsatz_verkaeufer
             // 
-            this.em_verkaufe_gv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.em_verkaufe_gv.Location = new System.Drawing.Point(45, 299);
-            this.em_verkaufe_gv.Name = "em_verkaufe_gv";
-            this.em_verkaufe_gv.Size = new System.Drawing.Size(495, 190);
-            this.em_verkaufe_gv.TabIndex = 79;
+            this.fm_umsatz_verkaeufer.FormattingEnabled = true;
+            this.fm_umsatz_verkaeufer.Location = new System.Drawing.Point(34, 513);
+            this.fm_umsatz_verkaeufer.Name = "fm_umsatz_verkaeufer";
+            this.fm_umsatz_verkaeufer.Size = new System.Drawing.Size(213, 21);
+            this.fm_umsatz_verkaeufer.TabIndex = 81;
+            this.fm_umsatz_verkaeufer.DropDown += new System.EventHandler(this.fm_umsatz_verkaeufer_DropDown);
+            // 
+            // fm_umsatz
+            // 
+            this.fm_umsatz.Location = new System.Drawing.Point(36, 540);
+            this.fm_umsatz.Name = "fm_umsatz";
+            this.fm_umsatz.Size = new System.Drawing.Size(103, 20);
+            this.fm_umsatz.TabIndex = 82;
+            // 
+            // em_einkaufe_debitor
+            // 
+            this.em_einkaufe_debitor.FormattingEnabled = true;
+            this.em_einkaufe_debitor.Location = new System.Drawing.Point(40, 50);
+            this.em_einkaufe_debitor.Name = "em_einkaufe_debitor";
+            this.em_einkaufe_debitor.Size = new System.Drawing.Size(175, 21);
+            this.em_einkaufe_debitor.TabIndex = 80;
+            this.em_einkaufe_debitor.DropDown += new System.EventHandler(this.em_einkaufe_debitor_DropDown);
+            // 
+            // em_einkaufe_kreditor
+            // 
+            this.em_einkaufe_kreditor.FormattingEnabled = true;
+            this.em_einkaufe_kreditor.Location = new System.Drawing.Point(40, 302);
+            this.em_einkaufe_kreditor.Name = "em_einkaufe_kreditor";
+            this.em_einkaufe_kreditor.Size = new System.Drawing.Size(175, 21);
+            this.em_einkaufe_kreditor.TabIndex = 81;
+            this.em_einkaufe_kreditor.DropDown += new System.EventHandler(this.em_einkaufe_kreditor_DropDown);
             // 
             // ERPForAll
             // 
@@ -1214,21 +1110,20 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "ERPForAll";
             this.Text = "ERPForAll";
-            this.Load += new System.EventHandler(this.ERPForAll_Load_1);
+            this.Load += new System.EventHandler(this.ERPForAll_Load);
             this.tabControl1.ResumeLayout(false);
             this.Finanzmodul.ResumeLayout(false);
             this.Finanzmodul.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fm_mahnliste_gv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fm_umsatz_gv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fm_kreditoren_gv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fm_debitoren_gv)).EndInit();
             this.Lagermodul.ResumeLayout(false);
             this.Lagermodul.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lm_artikel_gv)).EndInit();
             this.Einkaufsmodul.ResumeLayout(false);
             this.Einkaufsmodul.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lm_artikel_gv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.em_einkaufe_gv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.em_verkaufe_gv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.em_einkaufe_gv)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1264,8 +1159,8 @@
         private System.Windows.Forms.Button lm_lagermenge_set;
         private System.Windows.Forms.Button lm_lagerort_add;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button em_kreditoren_show;
-        private System.Windows.Forms.Button em_bestellungen_show;
+        private System.Windows.Forms.Button em_verkaufe_show;
+        private System.Windows.Forms.Button em_einkaeufe_show;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox lm_lagerort_cb;
         private System.Windows.Forms.Label label21;
@@ -1313,28 +1208,12 @@
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.ComboBox fm_verkauf_kunde;
         private System.Windows.Forms.ComboBox fm_verkauf_artikel;
-        private System.Windows.Forms.ComboBox fm_status_status;
         private System.Windows.Forms.ComboBox fm_status_unbezahlt;
-        private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Button fm_status_set;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.ComboBox lm_lagermenge_lagerort;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.TextBox em_bestellungen_preis_ps;
-        private System.Windows.Forms.TextBox em_bestellungen_menge;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.ComboBox em_bestellungen_artikel;
-        private System.Windows.Forms.Label label53;
-        private System.Windows.Forms.ComboBox em_bestellungen_debitor;
-        private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.ComboBox em_bestellungen_kreditor;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.ComboBox em_bestellungen_status;
-        private System.Windows.Forms.Button em_bestellungen_add;
         private System.Windows.Forms.TextBox fm_debitoren_email;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox fm_kreditoren_email;
@@ -1342,10 +1221,15 @@
         private System.Windows.Forms.DataGridView fm_debitoren_gv;
         private System.Windows.Forms.DataGridView fm_kreditoren_gv;
         private System.Windows.Forms.DataGridView fm_mahnliste_gv;
-        private System.Windows.Forms.DataGridView fm_umsatz_gv;
         private System.Windows.Forms.DataGridView lm_artikel_gv;
         private System.Windows.Forms.DataGridView em_verkaufe_gv;
         private System.Windows.Forms.DataGridView em_einkaufe_gv;
+        private System.Windows.Forms.ComboBox fm_verkauf_verkaeufer;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox fm_umsatz;
+        private System.Windows.Forms.ComboBox fm_umsatz_verkaeufer;
+        private System.Windows.Forms.ComboBox em_einkaufe_kreditor;
+        private System.Windows.Forms.ComboBox em_einkaufe_debitor;
     }
 }
 

@@ -1,465 +1,494 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ERPForAll.Data;
+using ERPForAll.Models;
 
 namespace ERPForAll
 {
     public partial class ERPForAll : Form
     {
+        private readonly KundeRepository kundeRepo = new KundeRepository();
+        private readonly LieferantRepository lieferantRepo = new LieferantRepository();
+        private readonly ArtikelRepository artikelRepo = new ArtikelRepository();
+        private readonly BestellungRepository bestellungRepo = new BestellungRepository();
+        private readonly UmsatzRepository umsatzRepo = new UmsatzRepository();
+        private readonly MahnungRepository mahnungRepo = new MahnungRepository();
+        private readonly LagerortRepository lagerortRepo = new LagerortRepository();
+        private readonly VerkaufService verkaufService = new VerkaufService();
+        private readonly ReportRepository reportRepo = new ReportRepository();
+        private readonly ArtikelLagerortRepository artikelLagerortRepo = new ArtikelLagerortRepository();
+
+
         public ERPForAll()
         {
             InitializeComponent();
         }
 
-        private void ERPForAll_Load_1(object sender, EventArgs e)
+        private void ERPForAll_Load(object sender, EventArgs e)
         {
             fm_verkauf_status.Items.Clear();
             fm_verkauf_status.Items.Add("Bezahlt");
             fm_verkauf_status.Items.Add("Nicht bezahlt");
         }
 
-        public class ComboBoxItem
-        {
-            public string Text { get; set; }
-            public object Value { get; set; }
-
-            public override string ToString()
-            {
-                return Text; // nur der Text wird in der ComboBox angezeigt
-            }
-        }
-
-        private void LoadArtikelComboBox()
-        {
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;Database=ERPFORALL;Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                string query = "SELECT PKey_Artikel, Name FROM Artikel ORDER BY Name";
-
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    try
-                    {
-                        con.Open();
-                        SqlDataReader reader = cmd.ExecuteReader();
-
-                        fm_verkauf_artikel.Items.Clear(); // ComboBox vorher leeren
-
-                        while (reader.Read())
-                        {
-                            fm_verkauf_artikel.Items.Add(new ComboBoxItem
-                            {
-                                Text = reader["Name"].ToString(),
-                                Value = reader["PKey_Artikel"]
-                            });
-                        }
-
-                        if (fm_verkauf_artikel.Items.Count > 0)
-                            fm_verkauf_artikel.SelectedIndex = 0; // ersten Artikel auswählen
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Fehler beim Laden der Artikel: " + ex.Message);
-                    }
-                }
-            }
-        }
-
-        private void LoadKundenComboBox()
-        {
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;Database=ERPFORALL;Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                string query = "SELECT PKey_Kunde, Vorname, Nachname FROM Kunde ORDER BY Nachname, Vorname";
-
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    try
-                    {
-                        con.Open();
-                        SqlDataReader reader = cmd.ExecuteReader();
-
-                        fm_verkauf_kunde.Items.Clear(); // ComboBox leeren
-
-                        while (reader.Read())
-                        {
-                            fm_verkauf_kunde.Items.Add(new ComboBoxItem
-                            {
-                                Text = reader["Nachname"].ToString() + ", " + reader["Vorname"].ToString(),
-                                Value = reader["PKey_Kunde"]
-                            });
-                        }
-
-                        if (fm_verkauf_kunde.Items.Count > 0)
-                            fm_verkauf_kunde.SelectedIndex = 0; // ersten Kunden auswählen
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Fehler beim Laden der Kunden: " + ex.Message);
-                    }
-                }
-            }
-        }
-
+        // -------------------------
+        // Kreditoren (Lieferanten)
+        // -------------------------
         private void fm_kreditoren_add_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;
-                                Database=ERPFORALL;
-                                Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
+            var lieferant = new Lieferant
             {
-                string query = "INSERT INTO Lieferant (Vorname, Nachname, Email, Addresse, Ort, PLZ) " +
-                               "VALUES (@Vorname, @Nachname, @Email, @Adresse, @Ort, @PLZ)";
+                Vorname = fm_kreditoren_vorname.Text,
+                Nachname = fm_kreditoren_name.Text,
+                Email = fm_kreditoren_email.Text,
+                Adresse = fm_kreditoren_adresse.Text,
+                Ort = fm_kreditoren_ort.Text,
+                PLZ = int.Parse(fm_kreditoren_plz.Text)
+            };
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@Vorname", fm_kreditoren_vorname.Text);
-                    cmd.Parameters.AddWithValue("@Nachname", fm_kreditoren_name.Text);
-                    cmd.Parameters.AddWithValue("@Email", fm_kreditoren_email.Text);
-                    cmd.Parameters.AddWithValue("@Adresse", fm_kreditoren_adresse.Text);
-                    cmd.Parameters.AddWithValue("@Ort", fm_kreditoren_ort.Text);
-                    cmd.Parameters.AddWithValue("@PLZ", int.Parse(fm_kreditoren_plz.Text));
-
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Kreditor erfolgreich hinzugefügt!");
-
-                        // Felder nach Erfolg zurücksetzen
-                        fm_kreditoren_vorname.Text = "";
-                        fm_kreditoren_name.Text = "";
-                        fm_kreditoren_email.Text = "";
-                        fm_kreditoren_adresse.Text = "";
-                        fm_kreditoren_ort.Text = "";
-                        fm_kreditoren_plz.Text = "";
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Fehler beim Speichern: " + ex.Message);
-                    }
-                }
-            }
-        }
-
-        private void fm_debitoren_add_Click(object sender, EventArgs e)
-        {
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;
-                                Database=ERPFORALL;
-                                Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                string query = "INSERT INTO Kunde (Vorname, Nachname, Email, Adresse, Ort, PLZ) " +
-                               "VALUES (@Vorname, @Nachname, @Email, @Adresse, @Ort, @PLZ)";
-
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@Vorname", fm_debitoren_vorname.Text);
-                    cmd.Parameters.AddWithValue("@Nachname", fm_debitoren_name.Text);
-                    cmd.Parameters.AddWithValue("@Email", fm_debitoren_email.Text);
-                    cmd.Parameters.AddWithValue("@Adresse", fm_debitoren_adresse.Text);
-                    cmd.Parameters.AddWithValue("@Ort", fm_debitoren_ort.Text);
-                    cmd.Parameters.AddWithValue("@PLZ", int.Parse(fm_debitoren_plz.Text));
-
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Debitor erfolgreich hinzugefügt!");
-
-                        // Felder nach Erfolg zurücksetzen
-                        fm_debitoren_vorname.Text = "";
-                        fm_debitoren_name.Text = "";
-                        fm_debitoren_email.Text = "";
-                        fm_debitoren_adresse.Text = "";
-                        fm_debitoren_ort.Text = "";
-                        fm_debitoren_plz.Text = "";
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Fehler beim Speichern: " + ex.Message);
-                    }
-                }
-            }
-        }
-
-        private void fm_debitoren_show_Click(object sender, EventArgs e)
-        {
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;
-                                Database=ERPFORALL;
-                                Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                string query = "SELECT PKey_Kunde AS ID, Vorname, Nachname, Email, Adresse, Ort, PLZ FROM Kunde";
-
-                using (SqlDataAdapter adapter = new SqlDataAdapter(query, con))
-                {
-                    try
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);  // Daten aus der DB in DataTable laden
-
-                        fm_debitoren_gv.DataSource = dt; // DataGridView mit Daten füllen
-                        fm_debitoren_gv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Spaltenbreite anpassen
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Fehler beim Laden der Debitoren: " + ex.Message);
-                    }
-                }
-            }
+            lieferantRepo.Add(lieferant);
+            MessageBox.Show("Kreditor erfolgreich hinzugefügt!");
         }
 
         private void fm_kreditoren_show_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;
-                                Database=ERPFORALL;
-                                Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                string query = "SELECT PKey_Lieferant AS ID, Vorname, Nachname, Email, Addresse, Ort, PLZ FROM Lieferant";
-
-                using (SqlDataAdapter adapter = new SqlDataAdapter(query, con))
-                {
-                    try
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);  // Daten aus der DB in DataTable laden
-
-                        fm_kreditoren_gv.DataSource = dt; // DataGridView mit Daten füllen
-                        fm_kreditoren_gv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Spaltenbreite anpassen
-                        fm_kreditoren_gv.ScrollBars = ScrollBars.Both; // Scrollbalken bei Bedarf
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Fehler beim Laden der Kreditoren: " + ex.Message);
-                    }
-                }
-            }
+            fm_kreditoren_gv.DataSource = lieferantRepo.GetAll();
         }
 
-        private void fm_umsatz_show_Click(object sender, EventArgs e)
+        // -------------------------
+        // Debitoren (Kunden)
+        // -------------------------
+        private void fm_debitoren_add_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;
-                                Database=ERPFORALL;
-                                Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
+            var kunde = new Kunde
             {
-                // Umsatz pro Kunde berechnen
-                string query = @"
-            SELECT 
-                k.PKey_Kunde AS KundeID,
-                k.Vorname,
-                k.Nachname,
-                SUM(ba.Menge * ba.[Preis Pro Stück]) AS Umsatz
-            FROM Kunde k
-            INNER JOIN Bestellung b ON k.PKey_Kunde = b.Fkey_Kunde
-            INNER JOIN Bestellung_Artikel ba ON b.PKey_Bestellung = ba.FKey_Bestellung
-            GROUP BY k.PKey_Kunde, k.Vorname, k.Nachname
-            ORDER BY Umsatz DESC";
+                Vorname = fm_debitoren_vorname.Text,
+                Nachname = fm_debitoren_name.Text,
+                Email = fm_debitoren_email.Text,
+                Adresse = fm_debitoren_adresse.Text,
+                Ort = fm_debitoren_ort.Text,
+                PLZ = int.Parse(fm_debitoren_plz.Text)
+            };
 
-                using (SqlDataAdapter adapter = new SqlDataAdapter(query, con))
-                {
-                    try
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-
-                        fm_umsatz_gv.DataSource = dt; // DataGridView füllen
-                        fm_umsatz_gv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Spaltenbreite anpassen
-                        fm_umsatz_gv.ScrollBars = ScrollBars.Both; // Scrollbalken
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Fehler beim Laden der Umsätze: " + ex.Message);
-                    }
-                }
-            }
+            kundeRepo.Add(kunde);
+            MessageBox.Show("Debitor erfolgreich hinzugefügt!");
         }
 
-        private void fm_mahnliste_show_Click(object sender, EventArgs e)
+        private void fm_debitoren_show_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;
-                                Database=ERPFORALL;
-                                Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                // Mahnliste: Kunden mit Bestellungen, die noch nicht bezahlt sind
-                string query = @"
-            SELECT 
-                k.PKey_Kunde AS KundeID,
-                k.Vorname,
-                k.Nachname,
-                b.PKey_Bestellung AS BestellungID,
-                b.Datum,
-                b.Fälligkeit,
-                b.Status,
-                SUM(ba.Menge * ba.[Preis Pro Stück]) AS Betrag
-            FROM Kunde k
-            INNER JOIN Bestellung b ON k.PKey_Kunde = b.Fkey_Kunde
-            INNER JOIN Bestellung_Artikel ba ON b.PKey_Bestellung = ba.FKey_Bestellung
-            WHERE b.Status <> 'Bezahlt' -- Nur unbezahlte Bestellungen
-            GROUP BY k.PKey_Kunde, k.Vorname, k.Nachname, b.PKey_Bestellung, b.Datum, b.Fälligkeit, b.Status
-            ORDER BY b.Fälligkeit ASC";
-
-                using (SqlDataAdapter adapter = new SqlDataAdapter(query, con))
-                {
-                    try
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-
-                        fm_mahnliste_gv.DataSource = dt;
-                        fm_mahnliste_gv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                        fm_mahnliste_gv.ScrollBars = ScrollBars.Both;
-
-                        // Betrag als Währung formatieren
-                        fm_mahnliste_gv.Columns["Betrag"].DefaultCellStyle.Format = "C2";
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Fehler beim Laden der Mahnliste: " + ex.Message);
-                    }
-                }
-            }
+            fm_debitoren_gv.DataSource = kundeRepo.GetAll();
         }
 
+        // -------------------------
+        // Artikel
+        // -------------------------
         private void fm_artikel_add_Click(object sender, EventArgs e)
         {
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;
-                                Database=ERPFORALL;
-                                Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
+            var artikel = new Artikel
             {
-                string query = "INSERT INTO Artikel (Name, Beschreibung, Kategorie, Menge) " +
-                               "VALUES (@Name, @Beschreibung, @Kategorie, @Menge)";
+                Name = fm_artikel_name.Text,
+                Beschreibung = fm_artikel_beschreibung.Text,
+                Kategorie = fm_artikel_kategorie.Text,
+            };
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@Name", fm_artikel_name.Text);
-                    cmd.Parameters.AddWithValue("@Beschreibung", fm_artikel_beschreibung.Text);
-                    cmd.Parameters.AddWithValue("@Kategorie", fm_artikel_kategorie.Text);
-                    cmd.Parameters.AddWithValue("@Menge", 0); // Anfangsbestand = 0
-
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Artikel erfolgreich hinzugefügt!");
-
-                        // Felder nach Erfolg zurücksetzen
-                        fm_artikel_name.Text = "";
-                        fm_artikel_beschreibung.Text = "";
-                        fm_artikel_kategorie.Text = "";
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Fehler beim Speichern des Artikels: " + ex.Message);
-                    }
-                }
-            }
+            artikelRepo.Add(artikel);
+            MessageBox.Show("Artikel erfolgreich hinzugefügt!");
         }
 
+        // -------------------------
+        // Bestellungen (Verkäufe)
+        // -------------------------
         private void fm_verkauf_artikel_DropDown(object sender, EventArgs e)
         {
-            LoadArtikelComboBox();
+            fm_verkauf_artikel.DataSource = artikelRepo.GetAll();
+            fm_verkauf_artikel.DisplayMember = nameof(Artikel.Name);
+            fm_verkauf_artikel.ValueMember = nameof(Artikel.PKey_Artikel);
         }
 
         private void fm_verkauf_kunde_DropDown(object sender, EventArgs e)
         {
-            LoadKundenComboBox();
+            fm_verkauf_kunde.DataSource = kundeRepo.GetAll();
+            fm_verkauf_kunde.DisplayMember = nameof(Kunde.VollerName);
+            fm_verkauf_kunde.ValueMember = nameof(Kunde.PKey_Kunde);
         }
 
         private void fm_verkauf_add_Click(object sender, EventArgs e)
         {
-            if (fm_verkauf_kunde.SelectedItem == null || fm_verkauf_artikel.SelectedItem == null)
+            if (fm_verkauf_kunde.SelectedValue == null || fm_verkauf_artikel.SelectedValue == null)
             {
                 MessageBox.Show("Bitte Kunde und Artikel auswählen!");
                 return;
             }
-
-            if (string.IsNullOrWhiteSpace(fm_verkauf_menge.Text) || string.IsNullOrWhiteSpace(fm_verkauf_preis_ps.Text))
+            if (!int.TryParse(fm_verkauf_menge.Text, out int menge) ||
+                !decimal.TryParse(fm_verkauf_preis_ps.Text, out decimal preisProStueck))
             {
-                MessageBox.Show("Bitte Menge und Preis pro Stück eingeben!");
+                MessageBox.Show("Bitte gültige Menge und Preis pro Stück eingeben!");
                 return;
             }
 
-            int kundeId = (int)((ComboBoxItem)fm_verkauf_kunde.SelectedItem).Value;
-            int artikelId = (int)((ComboBoxItem)fm_verkauf_artikel.SelectedItem).Value;
-            int menge = int.Parse(fm_verkauf_menge.Text);
-            decimal preisProStueck = decimal.Parse(fm_verkauf_preis_ps.Text);
+            int kundeId = (int)fm_verkauf_kunde.SelectedValue;
+            int artikelId = (int)fm_verkauf_artikel.SelectedValue;
             string status = fm_verkauf_status.SelectedItem?.ToString() ?? "Nicht bezahlt";
 
-            string connectionString = @"Data Source=LAPTOP-QEUETPR0\SQLEXPRESS;Database=ERPFORALL;Trusted_Connection=True;";
-
-            using (SqlConnection con = new SqlConnection(connectionString))
+            int? lieferantId = fm_verkauf_verkaeufer.SelectedValue as int?;
+            if (lieferantId == null)
             {
-                con.Open();
-                SqlTransaction transaction = con.BeginTransaction();
+                MessageBox.Show("Bitte einen Verkäufer (Kreditor) auswählen.");
+                return;
+            }
 
-                try
+            try
+            {
+                verkaufService.CreateVerkauf(
+                    kundeId: kundeId,
+                    artikelId: artikelId,
+                    menge: menge,
+                    preisProStueck: preisProStueck,
+                    status: status,
+                    lieferantIdOverride: lieferantId   // 👈 ausgewählten Kreditor speichern
+                );
+
+                MessageBox.Show("Verkauf erfolgreich hinzugefügt!");
+
+                fm_verkauf_menge.Clear();
+                fm_verkauf_preis_ps.Clear();
+                fm_verkauf_status.SelectedIndex = -1;
+                fm_verkauf_verkaeufer.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Speichern des Verkaufs: " + ex.Message);
+            }
+        }
+
+
+        // -------------------------
+        // Umsätze
+        // -------------------------
+        private void fm_umsatz_show_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal gesamt = reportRepo.GetGesamtUmsatz();
+                fm_umsatz.Text = gesamt.ToString("C2"); // hübsch formatiert
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Berechnen des Umsatzes: " + ex.Message);
+            }
+        }
+
+
+        // -------------------------
+        // Mahnliste
+        // -------------------------
+        private void fm_mahnliste_show_Click(object sender, EventArgs e)
+        {
+            fm_mahnliste_gv.DataSource = mahnungRepo.GetAll();
+        }
+
+        // Lagerort
+        private void lm_lagerort_add_Click(object sender, EventArgs e)
+        {
+            // Validierung: Adresse, Ort und PLZ sind in der DB NOT NULL
+            if (string.IsNullOrWhiteSpace(lm_lagerort_adresse.Text))
+            {
+                MessageBox.Show("Adresse ist erforderlich.");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(lm_lagerort_ort.Text))
+            {
+                MessageBox.Show("Ort ist erforderlich.");
+                return;
+            }
+            if (!int.TryParse(lm_lagerort_plz.Text, out int plz))
+            {
+                MessageBox.Show("PLZ muss eine Zahl sein.");
+                return;
+            }
+
+            var lagerort = new Lagerort
+            {
+                Name = string.IsNullOrWhiteSpace(lm_lagerort_name.Text) ? null : lm_lagerort_name.Text,
+                Adresse = lm_lagerort_adresse.Text,
+                Ort = lm_lagerort_ort.Text,
+                PLZ = plz
+            };
+
+            try
+            {
+                lagerortRepo.Add(lagerort);
+                MessageBox.Show("Lagerort erfolgreich hinzugefügt!");
+
+                // Felder leeren
+                lm_lagerort_name.Clear();
+                lm_lagerort_adresse.Clear();
+                lm_lagerort_ort.Clear();
+                lm_lagerort_plz.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Speichern des Lagerorts: " + ex.Message);
+            }
+        }
+
+        private void lm_lagerort_cb_DropDown(object sender, EventArgs e)
+        {
+            var lagerorte = lagerortRepo.GetAll();
+
+            lm_lagerort_cb.DataSource = lagerorte;
+            lm_lagerort_cb.DisplayMember = nameof(Lagerort.Name);        // Text, der angezeigt wird
+            lm_lagerort_cb.ValueMember = nameof(Lagerort.PKey_Lagerort); // Wert im Hintergrund
+        }
+
+        private void lm_artikel_show_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lm_lagerort_cb.SelectedValue == null)
                 {
-                    // 1️⃣ Bestellung einfügen
-                    string insertBestellung = @"
-                INSERT INTO Bestellung (FKey_Kunde, Datum, Fälligkeit, Status) 
-                OUTPUT INSERTED.PKey_Bestellung
-                VALUES (@FKey_Kunde, @Datum, @Faelligkeit, @Status)";
-
-                    int bestellungId;
-                    using (SqlCommand cmd = new SqlCommand(insertBestellung, con, transaction))
-                    {
-                        cmd.Parameters.AddWithValue("@FKey_Kunde", kundeId);
-                        cmd.Parameters.AddWithValue("@Datum", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@Faelligkeit", DateTime.Now.AddDays(14)); // z.B. 14 Tage Zahlungsziel
-                        cmd.Parameters.AddWithValue("@Status", status);
-
-                        bestellungId = (int)cmd.ExecuteScalar();
-                    }
-
-                    // 2️⃣ Artikel zur Bestellung hinzufügen
-                    string insertBestellungArtikel = @"
-                INSERT INTO Bestellung_Artikel (FKey_Bestellung, FKey_Artikel, Menge, [Preis Pro Stück]) 
-                VALUES (@FKey_Bestellung, @FKey_Artikel, @Menge, @PreisProStueck)";
-
-                    using (SqlCommand cmd = new SqlCommand(insertBestellungArtikel, con, transaction))
-                    {
-                        cmd.Parameters.AddWithValue("@FKey_Bestellung", bestellungId);
-                        cmd.Parameters.AddWithValue("@FKey_Artikel", artikelId);
-                        cmd.Parameters.AddWithValue("@Menge", menge);
-                        cmd.Parameters.AddWithValue("@PreisProStueck", preisProStueck);
-
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    transaction.Commit();
-                    MessageBox.Show("Verkauf erfolgreich hinzugefügt!");
-
-                    // Eingabefelder zurücksetzen
-                    fm_verkauf_menge.Text = "";
-                    fm_verkauf_preis_ps.Text = "";
-                    fm_verkauf_status.SelectedIndex = -1;
+                    MessageBox.Show("Bitte zuerst einen Lagerort wählen.");
+                    return;
                 }
-                catch (Exception ex)
+
+                int lagerortId = (int)lm_lagerort_cb.SelectedValue;
+                var daten = artikelRepo.GetByLagerort(lagerortId);
+
+                lm_artikel_gv.DataSource = daten;
+                lm_artikel_gv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                lm_artikel_gv.RowHeadersVisible = false;
+
+                // Optional: schönere Spaltenüberschriften
+                if (lm_artikel_gv.Columns["ArtikelID"] != null) lm_artikel_gv.Columns["ArtikelID"].HeaderText = "Artikel-ID";
+                if (lm_artikel_gv.Columns["LagerortName"] != null) lm_artikel_gv.Columns["LagerortName"].HeaderText = "Lagerort";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Laden der Artikel: " + ex.Message);
+            }
+        }
+
+        private void fm_verkauf_verkaeufer_DropDown(object sender, EventArgs e)
+        {
+            var lieferanten = lieferantRepo.GetAll();
+            fm_verkauf_verkaeufer.DataSource = lieferanten;
+            fm_verkauf_verkaeufer.DisplayMember = nameof(Lieferant.VollerName);   // "Nachname, Vorname"
+            fm_verkauf_verkaeufer.ValueMember = nameof(Lieferant.PKey_Lieferant);
+        }
+
+        private void fm_status_unbezahlt_DropDown(object sender, EventArgs e)
+        {
+            var daten = bestellungRepo.GetUnbezahlte();
+
+            fm_status_unbezahlt.DataSource = daten;
+            fm_status_unbezahlt.DisplayMember = nameof(BestellungStatusDto.Anzeige);         // Text im Dropdown
+            fm_status_unbezahlt.ValueMember = nameof(BestellungStatusDto.PKey_Bestellung); // Wert im Hintergrund
+        }
+
+        private void fm_status_set_Click(object sender, EventArgs e)
+        {
+            if (fm_status_unbezahlt.SelectedValue == null)
+            {
+                MessageBox.Show("Bitte zuerst eine unbezahlte Bestellung auswählen.");
+                return;
+            }
+
+            int bestellungId = (int)fm_status_unbezahlt.SelectedValue;
+
+            try
+            {
+                int rows = bestellungRepo.SetBezahlt(bestellungId);
+                if (rows == 1)
                 {
-                    transaction.Rollback();
-                    MessageBox.Show("Fehler beim Speichern des Verkaufs: " + ex.Message);
+                    MessageBox.Show("Bestellung wurde auf 'Bezahlt' gesetzt.");
+
+                    // Dropdown neu laden, damit die bezahlte Bestellung verschwindet
+                    var daten = bestellungRepo.GetUnbezahlte();
+                    fm_status_unbezahlt.DataSource = null;          // reset binding
+                    fm_status_unbezahlt.DataSource = daten;
+                    fm_status_unbezahlt.DisplayMember = nameof(BestellungStatusDto.Anzeige);
+                    fm_status_unbezahlt.ValueMember = nameof(BestellungStatusDto.PKey_Bestellung);
+                    fm_status_unbezahlt.SelectedIndex = daten.Count > 0 ? 0 : -1;
                 }
+                else
+                {
+                    MessageBox.Show("Es wurde keine Bestellung aktualisiert. Ist die Auswahl korrekt?");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Aktualisieren: " + ex.Message);
+            }
+        }
+
+        private void fm_umsatz_verkaeufer_DropDown(object sender, EventArgs e)
+        {
+            var verkaeufer = lieferantRepo.GetAll();
+            fm_umsatz_verkaeufer.DataSource = verkaeufer;
+            fm_umsatz_verkaeufer.DisplayMember = nameof(Lieferant.VollerName);
+            fm_umsatz_verkaeufer.ValueMember = nameof(Lieferant.PKey_Lieferant);
+
+            // Optional: ersten Eintrag selektieren
+            if (fm_umsatz_verkaeufer.Items.Count > 0 && fm_umsatz_verkaeufer.SelectedIndex < 0)
+                fm_umsatz_verkaeufer.SelectedIndex = 0;
+        }
+
+        private void lm_lagermenge_artikel_DropDown(object sender, EventArgs e)
+        {
+            var artikelListe = artikelRepo.GetAll();
+
+            lm_lagermenge_artikel.DataSource = artikelListe;
+            lm_lagermenge_artikel.DisplayMember = nameof(Artikel.Name);        // Anzeigename
+            lm_lagermenge_artikel.ValueMember = nameof(Artikel.PKey_Artikel); // ID als Wert
+
+            // optional: ersten Artikel gleich auswählen
+            if (lm_lagermenge_artikel.Items.Count > 0 && lm_lagermenge_artikel.SelectedIndex < 0)
+                lm_lagermenge_artikel.SelectedIndex = 0;
+        }
+
+        private void lm_lagermenge_lagerort_DropDown(object sender, EventArgs e)
+        {
+            var lagerorte = lagerortRepo.GetAll();
+
+            lm_lagermenge_lagerort.DataSource = lagerorte;
+            lm_lagermenge_lagerort.DisplayMember = nameof(Lagerort.Name);         // Name anzeigen
+            lm_lagermenge_lagerort.ValueMember = nameof(Lagerort.PKey_Lagerort); // ID als Wert
+
+            // optional: ersten auswählen
+            if (lm_lagermenge_lagerort.Items.Count > 0 && lm_lagermenge_lagerort.SelectedIndex < 0)
+                lm_lagermenge_lagerort.SelectedIndex = 0;
+        }
+
+        private void lm_lagermenge_set_Click(object sender, EventArgs e)
+        {
+            if (lm_lagermenge_artikel.SelectedValue == null)
+            {
+                MessageBox.Show("Bitte einen Artikel wählen.");
+                return;
+            }
+            if (lm_lagermenge_lagerort.SelectedValue == null)
+            {
+                MessageBox.Show("Bitte einen Lagerort wählen.");
+                return;
+            }
+            if (!int.TryParse(lm_lagermenge_menge.Text, out int menge))
+            {
+                MessageBox.Show("Bitte eine gültige Menge eingeben.");
+                return;
+            }
+
+            int artikelId = (int)lm_lagermenge_artikel.SelectedValue;
+            int lagerortId = (int)lm_lagermenge_lagerort.SelectedValue;
+
+            try
+            {
+                artikelLagerortRepo.SetBestand(artikelId, lagerortId, menge);
+
+                // Optional: aktuellen Bestand anzeigen/prüfen
+                int neuerBestand = artikelLagerortRepo.GetBestand(artikelId, lagerortId);
+                MessageBox.Show($"Bestand gesetzt. Neuer Bestand: {neuerBestand}");
+
+                // Optional: Eingaben leeren
+                // lm_lagermenge_menge.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Setzen der Lagermenge: " + ex.Message);
+            }
+        }
+
+        private void em_einkaufe_debitor_DropDown(object sender, EventArgs e)
+        {
+            var kunden = kundeRepo.GetAll();
+            em_einkaufe_debitor.DataSource = kunden;
+            em_einkaufe_debitor.DisplayMember = nameof(Kunde.VollerName);
+            em_einkaufe_debitor.ValueMember = nameof(Kunde.PKey_Kunde);
+
+            if (em_einkaufe_debitor.Items.Count > 0 && em_einkaufe_debitor.SelectedIndex < 0)
+                em_einkaufe_debitor.SelectedIndex = 0;
+        }
+
+        private void em_einkaufe_kreditor_DropDown(object sender, EventArgs e)
+        {
+            var kreditoren = lieferantRepo.GetAll();
+            em_einkaufe_kreditor.DataSource = kreditoren;
+            em_einkaufe_kreditor.DisplayMember = nameof(Lieferant.VollerName);
+            em_einkaufe_kreditor.ValueMember = nameof(Lieferant.PKey_Lieferant);
+
+            if (em_einkaufe_kreditor.Items.Count > 0 && em_einkaufe_kreditor.SelectedIndex < 0)
+                em_einkaufe_kreditor.SelectedIndex = 0;
+        }
+
+        private void em_verkaufe_show_Click(object sender, EventArgs e)
+        {
+            if (em_einkaufe_kreditor.SelectedValue == null)
+            {
+                MessageBox.Show("Bitte zuerst einen Kreditor auswählen.");
+                return;
+            }
+
+            int lieferantId = (int)em_einkaufe_kreditor.SelectedValue;
+
+            try
+            {
+                var daten = reportRepo.GetVerkaeufeByLieferant(lieferantId);
+                em_verkaufe_gv.DataSource = daten;
+
+                // Optik
+                em_verkaufe_gv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                em_verkaufe_gv.RowHeadersVisible = false;
+
+                // Kopfzeilen hübsch
+                if (em_verkaufe_gv.Columns["BestellungID"] != null) em_verkaufe_gv.Columns["BestellungID"].HeaderText = "Bestellung";
+                if (em_verkaufe_gv.Columns["Kunde"] != null) em_verkaufe_gv.Columns["Kunde"].HeaderText = "Kunde";
+                if (em_verkaufe_gv.Columns["Datum"] != null) em_verkaufe_gv.Columns["Datum"].HeaderText = "Datum";
+                if (em_verkaufe_gv.Columns["Faelligkeit"] != null) em_verkaufe_gv.Columns["Faelligkeit"].HeaderText = "Fälligkeit";
+                if (em_verkaufe_gv.Columns["Status"] != null) em_verkaufe_gv.Columns["Status"].HeaderText = "Status";
+                if (em_verkaufe_gv.Columns["Betrag"] != null)
+                {
+                    em_verkaufe_gv.Columns["Betrag"].HeaderText = "Betrag";
+                    em_verkaufe_gv.Columns["Betrag"].DefaultCellStyle.Format = "C2";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Laden der Verkäufe: " + ex.Message);
+            }
+        }
+
+        private void em_einkaeufe_show_Click(object sender, EventArgs e)
+        {
+            if (em_einkaufe_debitor.SelectedValue == null)
+            {
+                MessageBox.Show("Bitte zuerst einen Debitor (Kunden) auswählen.");
+                return;
+            }
+
+            int kundeId = (int)em_einkaufe_debitor.SelectedValue;
+
+            try
+            {
+                var daten = reportRepo.GetEinkaeufeByKunde(kundeId);
+                em_einkaufe_gv.DataSource = daten;
+
+                // Optik
+                em_einkaufe_gv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                em_einkaufe_gv.RowHeadersVisible = false;
+
+                // Spaltenbeschriftungen & Format
+                if (em_einkaufe_gv.Columns["BestellungID"] != null) em_einkaufe_gv.Columns["BestellungID"].HeaderText = "Bestellung";
+                if (em_einkaufe_gv.Columns["Lieferant"] != null) em_einkaufe_gv.Columns["Lieferant"].HeaderText = "Kreditor";
+                if (em_einkaufe_gv.Columns["Datum"] != null) em_einkaufe_gv.Columns["Datum"].HeaderText = "Datum";
+                if (em_einkaufe_gv.Columns["Faelligkeit"] != null) em_einkaufe_gv.Columns["Faelligkeit"].HeaderText = "Fälligkeit";
+                if (em_einkaufe_gv.Columns["Betrag"] != null)
+                {
+                    em_einkaufe_gv.Columns["Betrag"].HeaderText = "Betrag";
+                    em_einkaufe_gv.Columns["Betrag"].DefaultCellStyle.Format = "C2";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Laden der Einkäufe: " + ex.Message);
             }
         }
 
