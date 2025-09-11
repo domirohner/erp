@@ -10,7 +10,7 @@ Dies sollte diese Lücke mit einem Freemium-Modell schliessen:
 - Gratis: Finanzmodul als Einstieg
 - Kostenpflichtig: Lager- und Einkaufsmodul, später erweiterbar
 
-Die Module sollten folgende Eigenschaten beinhalten:
+Die Module sollten folgende Eigenschaften beinhalten:
 
 | Modul             | Erforderliche Eigenschaften                                                              | Optionale Eigenschaften                     |
 | ----------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------- |
@@ -61,7 +61,7 @@ Prozess "Bestellt Artikel":
 
 ## Anforderungsanalyse
 
-Auch die Anfoderungen und Risiken für unser Projekt haben wir aufgelistet:
+Auch die Anforderungen und Risiken für unser Projekt haben wir aufgelistet:
 
 ![Anforderungsanalyse](Anforderungsanalyse.png)
 
@@ -69,11 +69,11 @@ Das grösste Risiko für unser Projekt wäre, wenn Daten nicht gespeichert würd
 
 ## ERM/ERD
 
-Da wir dann ein gutes Verständniss hätten der jeweiligen Module konnten wir ein ERD für unsere Datenbank erstellen:
+Da wir dann ein gutes Verständnis hätten der jeweiligen Module konnten wir ein ERD für unsere Datenbank erstellen:
 
 ![ERD](ERD.png)
 
-Anschlissend auch das ERM:
+Anschliessend auch das ERM:
 
 ![ERM](ERM.png)
 
@@ -107,6 +107,16 @@ Dabei haben wir uns für drei Tabs entschieden:
 - Lagermodul
 - Einkaufsmodul
 
+Im Finanzmodul können Kreditoren und Debitoren angelegt und abgefragt werden. Der Umsatz und die Mahnliste können auch in diesem Modul angezeigt werden.
+Die Mahnliste wird aufgrund des gesetzen Status bei einer Rechnung erstellt. Der dazu verwendete Status kann in diesem Modul auch pro Rechnung angepasst werden.
+Zusätzlich haben wir Funktionen eingebaut, mit welchen man Artikel und Verkäufe anlegen kann.
+
+Im Lagermodul können neue Lagerorte hinzugefügt werden, die Lagermenge aktualisiert werden und auch die Artikel pro Lagerort angezeigt werden.
+
+Im Einkaufsmodul können pro Kreditor die Verkäufe angeigt werden und pro Debitor die Einkäufe.
+
+Bei den meisten Drop Down Buttons sind Events hinterlegt. Damit beim Klicken automatisch eine Funktion ausgeführt wird, wo dann die verfügbaren Daten auflistet werden.
+
 Die Datenbank wurde über SQL Server Management Studio von Hand erstellt:
 
 ![DB](Datenbank.png)
@@ -123,8 +133,7 @@ Die einzelnen Klassen haben wir im Models Ordner abgelegt. Die SQL Queries im Da
 
 Dies hat uns geholfen, den Code strukturierter zu halten und es konnte einfacher parallel am Code gearbeitet werden.
 
-Wir haben kein Usermanagement implementiert, da je nach Lizen die einzelnen Module (Tabs) freigeschaltet werden sollen. Die anderen Module werden ausgegraut und können nicht verwendet werden.
-Zudem hätten wir wir die Sicherheit für das Abspeichern der Passwörter der Benutzer nicht sicherstellen können.
+Wir haben kein Usermanagement implementiert, da je nach Lizenz die einzelnen Module (Tabs) freigeschaltet werden sollen. Die anderen Module werden ausgegraut und können nicht verwendet werden.
 
 ## Durchführung Tests
 
@@ -137,7 +146,7 @@ Somit können wir sicher sein, dass unsere Applikation so läuft, wie sie sollte
 ## Fazit
 
 Das Projekt zur Entwicklung eines ERPs war insgesamt erfolgreich und sehr lehrreich.
-Die Anwendung der im Unterricht behandelten Konzepte, darunter die Erstellung von Diagrammen wie ERM, ERD und Kollerationsmatrix konnten anhand eines praktischen Beispiels angewandt werden.
+Die Anwendung der im Unterricht behandelten Konzepte, darunter die Erstellung von Diagrammen wie ERM, ERD und Korrelationsmatrix konnten anhand eines praktischen Beispiels angewandt werden.
 Dies war sehr nützlich zur Festigung des gelernten Schulinhaltes.
 
 Während der Entwicklung hatten wir zuerst einige Probleme mit dem Schreiben in die Datenbank. Als diese Probleme dann aber gelöst waren, konnten wir sehr schnell Fortschritte mit der Programmierung machen.
