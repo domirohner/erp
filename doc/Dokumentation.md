@@ -107,33 +107,49 @@ Dabei haben wir uns für drei Tabs entschieden:
 - Lagermodul
 - Einkaufsmodul
 
-Im Finanzmodul können Kreditoren und Debitoren angelegt und abgefragt werden. Der Umsatz und die Mahnliste können auch in diesem Modul angezeigt werden.
-Die Mahnliste wird aufgrund des gesetzen Status bei einer Rechnung erstellt. Der dazu verwendete Status kann in diesem Modul auch pro Rechnung angepasst werden.
-Zusätzlich haben wir Funktionen eingebaut, mit welchen man Artikel und Verkäufe anlegen kann.
+Um die Bedienung zu vereinfachen, sind bei den meisten Dropdown-Elementen Events hinterlegt, die beim Klicken automatisch die verfügbaren Daten laden und anzeigen.
 
-Im Lagermodul können neue Lagerorte hinzugefügt werden, die Lagermenge aktualisiert werden und auch die Artikel pro Lagerort angezeigt werden.
+### Finanzmodul
 
-Im Einkaufsmodul können pro Kreditor die Verkäufe angeigt werden und pro Debitor die Einkäufe.
+Im Finanzmodul lassen sich Kreditoren und Debitoren anlegen sowie abfragen.
+Zusätzlich können Umsätze und eine Mahnliste angezeigt werden.
+Die Mahnliste basiert auf dem jeweils gesetzten Rechnungsstatus, der hier direkt pro Rechnung angepasst werden kann.
+Darüber hinaus bietet das Modul Funktionen zum Anlegen von Artikeln und Verkäufen.
 
-Bei den meisten Drop Down Buttons sind Events hinterlegt. Damit beim Klicken automatisch eine Funktion ausgeführt wird, wo dann die verfügbaren Daten auflistet werden.
+### Lagermodul
+
+Hier können neue Lagerorte erfasst, Lagermengen aktualisiert und die Artikel pro Lagerort übersichtlich dargestellt werden.
+
+### Einkaufsmodul
+
+Im Einkaufsmodul lassen sich Verkäufe pro Kreditor sowie Einkäufe pro Debitor anzeigen.
+
+### Datenbank
 
 Die Datenbank wurde über SQL Server Management Studio von Hand erstellt:
 
 ![DB](Datenbank.png)
 
-Sämtliche DB Skripts sind [hier](/src/DB_Scripts/) zu finden. Diese wurden nachfolgend automatisch via Studio erstellt und abgelegt.
+Sämtliche DB Skripts sind [hier](/src/DB_Scripts/) zu finden und wurden nach der Entwicklung automatisch aus dem Studio exportiert.
 
-Nach der Erstellung der Datenbank haben wir mit der Programmierung begonnen. Dabei mussten wir zuerst die Verbindung zur Datenbank herstellen, damit wir in diese schreiben können.
+Nach dem Aufbau der Datenbank begann die Programmierung der Applikation.
+Zunächst stellten wir die Verbindung zum SQL Server her, um Lese- und Schreiboperationen zu ermöglichen.
 
-Zu Beginn der Programmierung hatten wir den gesamten Code in einer Daten. Da dies schnell unübersichtlich wurde, mussten wir den Code aufteilen:
+### Code-Struktur
+
+Anfangs befand sich der gesamte Code in einer einzigen Datei, was rasch unübersichtlich wurde.
+Wir entschieden uns deshalb für eine klare Aufteilung in Schichten und Ordner:
 
 ![Aufteilung_Code](Aufteilung_ERP_Code.png)
 
-Die einzelnen Klassen haben wir im Models Ordner abgelegt. Die SQL Queries im Data Ordner, auch andere Helper, wie ein Helper um in die Datenbank zu schreiben, wurde in diesem Ordner abgelegt.
+- Models: Enthält die Datenklassen für Entitäten wie Artikel, Kunde oder Rechnung.
+- Data: Beinhaltet sämtliche SQL-Queries sowie Hilfsfunktionen für den Datenbankzugriff.
 
-Dies hat uns geholfen, den Code strukturierter zu halten und es konnte einfacher parallel am Code gearbeitet werden.
+### Weitere Überlegungen
 
-Wir haben kein Usermanagement implementiert, da je nach Lizenz die einzelnen Module (Tabs) freigeschaltet werden sollen. Die anderen Module werden ausgegraut und können nicht verwendet werden.
+Ein User-Management haben wir bewusst nicht implementiert.
+Die Idee ist, dass künftig, abhängig von der Lizenzierung, einzelne Module (Tabs) freigeschaltet werden können.
+Nicht freigegebene Module erscheinen dann ausgegraut und sind nicht nutzbar.
 
 ## Durchführung Tests
 
