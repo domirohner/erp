@@ -1,16 +1,17 @@
-| Aktivität                   | Stunden geplant | Stunden geleistet (zusammen) | Delta | Erklärung |
-| --------------------------- | --------------- | ---------------------------- | ----- | --------- |
-| Initialisierung und Planung | 1               |                              |       |           |
-| Kontextdiagramme            | 2               |                              |       |           |
-| BPMN                        | 1               |                              |       |           |
-| Korrelationsmatrix          | 1               |                              |       |           |
-| ERM                         | 1               |                              |       |           |
-| Klassendiagramm             | 1               |                              |       |           |
-| Komponentendiagramm         | 1               |                              |       |           |
-| Testplan                    | 4               |                              |       |           |
-| Umsetzung Datenbank         | 6               |                              |       |           |
-| Umsetzung UI                | 5               |                              |       |           |
-| Programmierung              | 12              |                              |       |           |
-| Testszenarien durchführen   | 3               |                              |       |           |
-| Dokumentation               | 5               |                              |       |           |
-| Präsentation                | 2               |                              |       |           |
+| Aktivität                   | Stunden geplant | Stunden geleistet (zusammen) | Delta | Erklärung                                                                                                     |
+| --------------------------- | --------------- | ---------------------------- | ----- | ------------------------------------------------------------------------------------------------------------- |
+| Initialisierung und Planung | 1               | 1                            | 0     |                                                                                                               |
+| Kontextdiagramme            | 2               | 2                            | +1    | Zuerst haben wir ein gesamtes Kontextdiagramm erstellt und dann noch für jedes Modul                          |
+| BPMN                        | 1               | 1                            | 0     |                                                                                                               |
+| ERM/ERD                     | 1               | 2                            | +1    | Zum ERM haben wir auch noch ein ERD gemacht. Zudem mussten wir dies noch anpassen                             |
+| Korrelationsmatrix          | 1               | 1                            | 0     |                                                                                                               |
+| Anforderungsanalyse         | 1               | 1                            | 0     |                                                                                                               |
+| Klassendiagramm             | 1               | 1                            | 0     |                                                                                                               |
+| Komponentendiagramm         | 1               | 1                            | 0     |                                                                                                               |
+| Testplan                    | 4               | 3                            | -1    | Es konnten bereits vorhandene Tests kopiert werden                                                            |
+| Umsetzung Datenbank         | 6               | 4                            | -2    | Es wurde weniger Zeit für die Erstellung der DB benötigt                                                      |
+| Umsetzung UI                | 4               | 4                            | 0     |                                                                                                               |
+| Programmierung              | 8               | 10                           | +2    | Es traten einige Probleme bei der Programmierung auf. Zuerst funktionierte auch das Schreiben in die DB nicht |
+| Testszenarien durchführen   | 3               | 3                            | 0     |                                                                                                               |
+| Dokumentation               | 5               | 5                            | 0     |                                                                                                               |
+| Präsentation                | 2               | 2                            | 0     |                                                                                                               |
