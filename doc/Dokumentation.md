@@ -10,6 +10,16 @@ Dies sollte diese Lücke mit einem Freemium-Modell schliessen:
 - Gratis: Finanzmodul als Einstieg
 - Kostenpflichtig: Lager- und Einkaufsmodul, später erweiterbar
 
+Die Module sollten folgende Eigenschaten beinhalten:
+
+| Modul             | Erforderliche Eigenschaften                                                              | Optionale Eigenschaften                     |
+| ----------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------- |
+| **Finanzmodul**   | - Kreditoren verwalten<br>- Debitoren verwalten<br>- Umsatz pro Artikel erstellen können | - Mahnliste für säumige Debitoren           |
+| **Lagermodul**    | - Lagerorte definieren<br>- Lagermengen pro Artikel verwalten                            | - ABC-Liste für gelagerte Artikel erstellen |
+| **Einkaufsmodul** | - Lieferanten (=Kreditoren) verwalten<br>- Bestellungen von Artikeln verwalten           | - ABC-Liste der Lieferanten                 |
+
+Ziel ist es, ein allgemeingültiges ERM zu entwerfen, dieses im SQL-Server umzusetzen und die resultierende Applikation anhand definierter Testszenarien zu prüfen.
+
 ## Planung
 
 Zu Beginn unseres Projektes haben wir alle Tätigkeiten aufgelistet und die dafür benötigte Zeit geschätzt.
@@ -51,9 +61,11 @@ Prozess "Bestellt Artikel":
 
 ## Anforderungsanalyse
 
-Auch die Anfoderungen wurden aufgelistet:
+Auch die Anfoderungen und Risiken für unser Projekt haben wir aufgelistet:
 
 ![Anforderungsanalyse](Anforderungsanalyse.png)
+
+Das grösste Risiko für unser Projekt wäre, wenn Daten nicht gespeichert würden oder diese falsch abgelegt würden. Dies wäre kritisch, da somit Daten verloren gehen würden.
 
 ## ERM/ERD
 
@@ -95,8 +107,6 @@ Dabei haben wir uns für drei Tabs entschieden:
 - Lagermodul
 - Einkaufsmodul
 
-In unserer Applikation wird je nach Lizenz, welcher der Benutzer hat, die ensprechenden Tabs aufgeschaltet. Die restlichen Tabs werden ausgegraut. Deshalb wurd keine Userverwaltung erstellt.
-
 Die Datenbank wurde über SQL Server Management Studio von Hand erstellt:
 
 ![DB](Datenbank.png)
@@ -112,6 +122,9 @@ Zu Beginn der Programmierung hatten wir den gesamten Code in einer Daten. Da die
 Die einzelnen Klassen haben wir im Models Ordner abgelegt. Die SQL Queries im Data Ordner, auch andere Helper, wie ein Helper um in die Datenbank zu schreiben, wurde in diesem Ordner abgelegt.
 
 Dies hat uns geholfen, den Code strukturierter zu halten und es konnte einfacher parallel am Code gearbeitet werden.
+
+Wir haben kein Usermanagement implementiert, da je nach Lizen die einzelnen Module (Tabs) freigeschaltet werden sollen. Die anderen Module werden ausgegraut und können nicht verwendet werden.
+Zudem hätten wir wir die Sicherheit für das Abspeichern der Passwörter der Benutzer nicht sicherstellen können.
 
 ## Durchführung Tests
 
@@ -129,9 +142,9 @@ Dies war sehr nützlich zur Festigung des gelernten Schulinhaltes.
 
 Während der Entwicklung hatten wir zuerst einige Probleme mit dem Schreiben in die Datenbank. Als diese Probleme dann aber gelöst waren, konnten wir sehr schnell Fortschritte mit der Programmierung machen.
 Dies verdeutlicht die Herausforderungen in der Softwareentwicklung, insbesondere in der Fehleranalyse und Behebung.
-Alle wesentlichen Funktionen erfolgreich umgesetzt werden.
+Alle wesentlichen Funktionen konnten trotzdem erfolgreich umgesetzt werden.
 
 Wir haben auch bemerkt, dass das gemeinsame Arbeiten an einem Projekt zum Teil schwierig war, damit nicht die Änderung des Kollegen überschrieben werden.
-Dies forderte eine gute kommunikation im Team und ständiges aktualisieren.
+Dies forderte eine gute Kommunikation im Team und ständiges absprechen.
 
 Insgesamt war das Projekt eine gute Erfahrung, die Spass gemacht hat und einen praktischen Bezug zur Theorie herstellte.
