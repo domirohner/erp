@@ -27,6 +27,18 @@ In der nachfolgenden Tabelle sind alle geschätzten und effektiv geleisteten Stu
 
 ![Zeitplan](Zeitplan.png)
 
+Wir haben auch folgende Ziele für unser Projekt definiert.
+
+Muss-Ziele:
+- UI: Es ist eine grafische Oberfläche vorhanden, welche der Benutzer verwenden kann um Kreditoren, Debitoren etc. zu erfassen.
+- DB-Zugriff: Das Tool greift auf eine SQL Datenbank zu und kann Daten persistieren.
+- Module: Alle drei Module sind vorhanden und können aufgerufen werden.
+
+Kann-Ziele:
+- Artikelverwaltung: Die Artikel können direkt zu den Lagerorten zugeteilt werden.
+- User-Verwaltung: Es ist eine Userverwaltung vorhanden in welcher die Benutzer verwaltet werden können.
+- Unit-Tests: Alle definierten Tests sind als Unit-Tests vorhanden
+
 ## Kontextdiagramme
 
 Nach Analyse der Situation und Ausgangslage haben wir zuerst ein Kontextdiagramm mit allen Modulen erstellt:
