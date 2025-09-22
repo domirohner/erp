@@ -95,12 +95,6 @@ Durch das ERM konnte auch eine Korrelationsmatrix erstellt werden:
 
 ![Korrelationsmatrix](Korrelationsmatrix.png)
 
-## Klassendiagramm
-
-Auch eine Klassendiagramm haben wir noch erstellt:
-
-![Klassendiagramm](Klassendiagramm.png)
-
 ## Testfälle
 
 Folgende Testfälle wurden definiert und abgearbeitet:
