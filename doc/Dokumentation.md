@@ -27,15 +27,16 @@ In der nachfolgenden Tabelle sind alle geschätzten und effektiv geleisteten Stu
 
 ![Zeitplan](Zeitplan.png)
 
-Wir haben auch folgende Ziele für unser Projekt definiert.
+Wir haben auch folgende Hauptziele für unser Projekt definiert.
 
 Muss-Ziele:
+
 - UI: Es ist eine grafische Oberfläche vorhanden, welche der Benutzer verwenden kann um Kreditoren, Debitoren etc. zu erfassen.
 - DB-Zugriff: Das Tool greift auf eine SQL Datenbank zu und kann Daten persistieren.
 - Module: Alle drei Module sind vorhanden und können aufgerufen werden.
 
 Kann-Ziele:
-- Artikelverwaltung: Die Artikel können direkt zu den Lagerorten zugeteilt werden.
+
 - User-Verwaltung: Es ist eine Userverwaltung vorhanden in welcher die Benutzer verwaltet werden können.
 - Unit-Tests: Alle definierten Tests sind als Unit-Tests vorhanden
 
@@ -61,13 +62,17 @@ Da dieses Kontextdiagramm sehr grob ist, haben wir für alle Module auch noch ei
 
 ## Prozesse
 
+Durch die Kontextdiagramme fiel uns uns leicht ein BPMN Diagramm abzuleiten:
+
+![BPMN](BPMN.png)
+
 Wir haben uns auch noch zwei Prozesse genauer angeschaut um die Szenarien und Module besser zu verstehen.
 
 Prozess "Bestellt Artikel":
 
 ![Prozess_bestellt_Artikel](Prozess_bestellt_Artikel.png)
 
-Prozess "Bestellt Artikel":
+Prozess "Erstellt Rechnung":
 
 ![Prozess_erstellt_Rechnung](Prozess_erstellt_Rechnung.png)
 
@@ -136,7 +141,7 @@ Die Datenbank wurde über SQL Server Management Studio von Hand erstellt:
 
 ![DB](Datenbank.png)
 
-Sämtliche DB Skripts sind [hier](/src/DB_Scripts/) zu finden und wurden nach der Entwicklung automatisch aus dem Studio exportiert.
+Sämtliche DB Skripts sind [hier](/src/DB_Scripts/) zu finden und wurden nach der Entwicklung aus dem Studio exportiert.
 
 Nach dem Aufbau der Datenbank begann die Programmierung der Applikation.
 Zunächst stellten wir die Verbindung zum SQL Server her, um Lese- und Schreiboperationen zu ermöglichen.
@@ -153,8 +158,8 @@ Wir entschieden uns deshalb für eine klare Aufteilung in Schichten und Ordner:
 
 ### Weitere Überlegungen
 
-Ein User-Management haben wir bewusst nicht implementiert.
-Die Idee ist, dass künftig, abhängig von der Lizenzierung, einzelne Module (Tabs) freigeschaltet werden können.
+Ein User-Management haben wir nicht implementiert.
+Die Idee ist, dass abhängig von der Lizenzierung, die einzelnen Module (Tabs) freigeschaltet werden können.
 Nicht freigegebene Module erscheinen dann ausgegraut und sind nicht nutzbar.
 
 ## Durchführung Tests
