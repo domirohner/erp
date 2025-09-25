@@ -40,9 +40,17 @@ Kann-Ziele:
 - User-Verwaltung: Es ist eine Userverwaltung vorhanden in welcher die Benutzer verwaltet werden können.
 - Unit-Tests: Alle definierten Tests sind als Unit-Tests vorhanden
 
+## Anforderungsanalyse
+
+Die Anforderungen und Risiken für unser Projekt haben wir wie folgt aufgelistet:
+
+![Anforderungsanalyse](Anforderungsanalyse.png)
+
+Das grösste Risiko für unser Projekt wäre, wenn Daten nicht gespeichert würden oder diese falsch abgelegt würden. Dies wäre kritisch, da somit Daten verloren gehen würden.
+
 ## Kontextdiagramme
 
-Nach Analyse der Situation und Ausgangslage haben wir zuerst ein Kontextdiagramm mit allen Modulen erstellt:
+Nach Analyse haben wir zuerst ein Kontextdiagramm mit allen Modulen erstellt:
 
 ![Kontextdiagramm_Grob](Kontextdiagramm_Grob.png)
 
@@ -62,7 +70,7 @@ Da dieses Kontextdiagramm sehr grob ist, haben wir für alle Module auch noch ei
 
 ## Prozesse
 
-Durch die Kontextdiagramme fiel uns uns leicht ein BPMN Diagramm abzuleiten:
+Durch die Kontextdiagramme fiel uns uns leichter ein BPMN Diagramm abzuleiten:
 
 ![BPMN](BPMN.png)
 
@@ -76,29 +84,21 @@ Prozess "Erstellt Rechnung":
 
 ![Prozess_erstellt_Rechnung](Prozess_erstellt_Rechnung.png)
 
-## Anforderungsanalyse
+## Korrelationsmatrix
 
-Auch die Anforderungen und Risiken für unser Projekt haben wir aufgelistet:
+Vor derm ERM wurde eine Korrelationsmatrix erstellt:
 
-![Anforderungsanalyse](Anforderungsanalyse.png)
-
-Das grösste Risiko für unser Projekt wäre, wenn Daten nicht gespeichert würden oder diese falsch abgelegt würden. Dies wäre kritisch, da somit Daten verloren gehen würden.
+![Korrelationsmatrix](Korrelationsmatrix.png)
 
 ## ERM/ERD
 
-Da wir dann ein gutes Verständnis hätten der jeweiligen Module konnten wir ein ERD für unsere Datenbank erstellen:
+Da wir dann ein gutes Verständnis hätten der Entitäten für unsere Appliktion konnten wir ein ERD für unsere Datenbank erstellen:
 
 ![ERD](ERD.png)
 
 Anschliessend auch das ERM:
 
 ![ERM](ERM.png)
-
-## Korrelationsmatrix
-
-Durch das ERM konnte auch eine Korrelationsmatrix erstellt werden:
-
-![Korrelationsmatrix](Korrelationsmatrix.png)
 
 ## Testfälle
 
